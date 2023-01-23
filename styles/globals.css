@@ -8,5 +8,13 @@
 }
 
 body{
-  overflow-x: hidden;
+  @apply overflow-x-hidden font-opensans
+}
+
+p, li, input{
+  @apply text-[.9rem]
+}
+
+input{
+  @apply placeholder:text-[.9rem] py-1.5
 }

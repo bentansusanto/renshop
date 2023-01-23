@@ -10,6 +10,16 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily:{
+      'oswald' : ['Oswald'],
+      'opensans' : ['Open Sans']
+    },
+    colors : {
+        'black' : "#000000",
+        'white' : '#ffffff',
+        'gray' : '#9c9c9c',
+        'red' : '#F55050',
+    }
   },
   plugins: [],
 }
