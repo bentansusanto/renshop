@@ -1,32 +1,40 @@
-import React from 'react'
+import React,{useEffect, useRef} from 'react'
 import Image from 'next/image';
 import Star from '../../../public/assets/Star.svg'
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../../store/store';
+import { fetchProducts } from '../../../slice/productSlice';
+
+
 
 interface productProps {
-    product : productContent[];
     mobile : boolean;
     category : Category[];
 }
-
-interface productContent{
-    id : number;
-    title : string;
-    price : number;
-    image :string;
-    rating : {
-        rate : number;
-        count : number;
-    };
-}
-
 interface Category {
     image : string;
     category : string;
     link : string;
 }
 
-const ProductSection : React.FC<productProps> = ({product, mobile, category}) => {
+
+const ProductSection : React.FC<productProps> = ({mobile, category}) => {
+    const {entities} = useSelector((state : RootState) => state.product)
+    const dispatch = useDispatch<AppDispatch>()
+    const productRef = useRef(false)
+
+    useEffect(() => {
+        if(productRef.current === false){
+          dispatch(fetchProducts());
+        }
+        dispatch(fetchProducts());
+    
+        return () => {
+          productRef.current = true
+        }
+      }, [dispatch])
+
   return (
     <div>
         {/* Category */}
@@ -45,7 +53,7 @@ const ProductSection : React.FC<productProps> = ({product, mobile, category}) =>
             <h2 className='text-center font-oswald text-2xl font-medium'>Our Produts</h2>
         <div className='grid grid-cols-4 gap-5 justify-items-center mx-20'>
             {
-                product.map((val) => (
+                entities?.map((val:any) => (
                     <div key={val.id} className="w-[12rem] space-y-3">                       
                             <Image src={val.image} alt="" width={200} height={180} className='py-2 px-2'/>
                             {/* content */}
