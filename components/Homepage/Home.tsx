@@ -1,6 +1,7 @@
 import { useState, useEffect} from 'react';
 import HeroSection from "./components/HeroSection";
 import ProductSection from './components/ProductSection';
+import SubscribeSection from './components/SubscribeSection';
 
 
 const hero = {
@@ -55,6 +56,7 @@ const Home = () => {
     <div>
       <HeroSection hero={hero} mobile={Mobile}/>
       <ProductSection mobile={Mobile} category={Category}/>
+      <SubscribeSection/>
     </div>
   );
 };
