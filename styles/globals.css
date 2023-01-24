@@ -12,7 +12,7 @@ body{
 }
 
 p, li, input{
-  @apply text-[.9rem]
+  @apply text-[.9rem] list-none
 }
 
 input{

@@ -1,0 +1,6 @@
+.background{
+    background: url(../../../public/assets/bg-home.jpg);
+    background-position: center;
+    background-size: cover;
+    @apply w-screen h-[90vh]
+}

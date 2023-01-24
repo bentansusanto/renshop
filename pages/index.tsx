@@ -1,11 +1,12 @@
 
 import Layouts from '../layouts'
+import Homes from '../components/Homepage/Home';
 
 export default function Home() {
   return (
     <>
       <Layouts>
-        <h1>Hello World</h1>
+        <Homes/>
       </Layouts>
     </>
   );
