@@ -41,9 +41,11 @@ const ProductSection : React.FC<productProps> = ({mobile, category}) => {
         <div className='grid grid-cols-4 gap-x-2 mx-24 justify-items-center mt-10'>
            {
             category.map((val,idx) => (
-                <Link href={val.link} key={idx}>
+                <Link href={val.link} key={idx} className="relative">
                     <Image src={val.image} alt="" className='w-[20rem]'/>
-                    <p>{val.category}</p>
+                    <div className='bg-black w-full py-2 -mt-[2.8rem] opacity-50'>
+                        <h4 className=' text-xl font-semibold text-white text-center'>{val.category}</h4>
+                    </div>
                 </Link>
             ))
            } 
