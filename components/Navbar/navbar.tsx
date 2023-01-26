@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { FiShoppingCart } from "react-icons/fi";
 import Logo from "../../public/assets/Renshop-black.svg";
+import {CgMenuGridO} from 'react-icons/cg'
 
 
 type navItem = {
