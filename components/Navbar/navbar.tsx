@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { FiShoppingCart } from "react-icons/fi";
 import Logo from "../../public/assets/Renshop-black.svg";
-import NavMobile from "./components/NavMobile";
+import NavMobile from "./NavMobile";
 
 type navItem = {
   page: string;
@@ -44,7 +44,7 @@ const Navbar = () => {
       {Mobile ? (
         // Mobile
         <div>
-          <NavMobile />
+          <NavMobile/>
         </div>
       ) : (
         // Desktop
@@ -68,7 +68,7 @@ const Navbar = () => {
               </li>
               {open && (
                 <ul
-                  className="space-y-3 items-center mt-3 bg-[#fafafa] shadow-md rounded-md px-4 py-2 absolute top-8"
+                  className={`${open ? "space-y-3 items-center mt-3 bg-[#fafafa] shadow-md rounded-md px-4 py-2 absolute top-8 transition-opacity duration-500 ease-in-out" : "opacity-0"}`}
                   onMouseLeave={() => setOpen(false)}
                 >
                   {links.map((val, idx) => (
@@ -86,7 +86,7 @@ const Navbar = () => {
                 placeholder="Search your product"
                 className="rounded-md outline-none bg-[#f5f5f5] w-full px-2"
               />
-              <div className="ml-auto rounded-md bg-gray py-2 px-2">
+              <div className="ml-auto rounded-md bg-[#f5f5f5] py-2 px-2">
                 <BiSearch className="text-xl " />
               </div>
             </div>

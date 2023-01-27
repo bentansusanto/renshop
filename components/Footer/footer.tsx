@@ -57,6 +57,7 @@ const Footer = () => {
   }, [])
   
   return (
+    <>
     <div className='bg-[#fafafa] w-full h-56'>
       {/* <div className='grid grid-cols-2 px-32 py-5'>
         <div className='space-y-4'>
@@ -66,6 +67,7 @@ const Footer = () => {
           <Quicklink about={aboutLink} category={categoryLink} social={socialMedia} mobile={mobile}/>
       </div> */}
     </div>
+    </>
   )
 }
 
