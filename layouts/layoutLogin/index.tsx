@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
+import {Providers} from '../../provider/provider'
 
-const index = () => {
+interface AuthProps{
+  children : ReactNode
+}
+
+const index = (props : AuthProps) => {
+  const {children} = props
   return (
     <div>
-      
+      <Providers>
+        <main>{children}</main>
+      </Providers>
     </div>
   )
 }

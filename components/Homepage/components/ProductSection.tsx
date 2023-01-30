@@ -38,7 +38,7 @@ const ProductSection : React.FC<productProps> = ({mobile, category}) => {
   return (
     <div>
         {/* Category */}
-        <div className='grid grid-cols-4 gap-x-2 mx-24 justify-items-center mt-10'>
+        <div className={` ${mobile ? "grid-cols-2 gap-5 mx-5" : "grid-cols-4 gap-5 mx-24"} grid justify-items-center mt-10`}>
            {
             category.map((val,idx) => (
                 <Link href={val.link} key={idx} className="relative">
@@ -53,7 +53,7 @@ const ProductSection : React.FC<productProps> = ({mobile, category}) => {
         {/* Product List */}
         <div className='mt-32 space-y-24'>
             <h2 className='text-center font-oswald text-2xl font-medium'>Our Produts</h2>
-        <div className='grid grid-cols-4 gap-5 justify-items-center mx-20'>
+        <div className={`${mobile ? "grid-cols-2 gap-10 mx-6" : "grid-cols-4 gap-5 mx-20"} grid justify-items-center`}>
             {
                 entities?.map((val:any) => (
                     <div key={val.id} className="w-[12rem] space-y-3">                       
@@ -65,7 +65,7 @@ const ProductSection : React.FC<productProps> = ({mobile, category}) => {
                                     <Image src={Star} alt=""/>
                                     <p>{val.rating.rate}</p>
                                 </div>
-                                <h4 className='font-medium text-center'>{val.title}</h4>
+                                <h4 className={`${mobile ? "text-[.9rem]" : ""} font-regular text-center`}>{val.title}</h4>
                                 <p className='text-center font-semibold text-[1.2rem]'>${val.price}</p>
                             </div>
                     </div>

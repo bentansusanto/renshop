@@ -59,13 +59,13 @@ const Footer = () => {
   return (
     <>
     <div className='bg-[#fafafa] w-full h-56'>
-      {/* <div className='grid grid-cols-2 px-32 py-5'>
+      <div className={`${mobile ? "grid-cols-1 px-5" : "grid-cols-2 px-32"} grid py-5`}>
         <div className='space-y-4'>
           <Image src={Logo} alt="" className='w-10'/>
-          <p className='w-[40%] text-gray'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam maxime repellat deserunt fugiat maiores modi ratione.</p>
+          <p className={`${mobile ? "w-[90%]" : "w-[40%]"} text-gray`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam maxime repellat deserunt fugiat maiores modi ratione.</p>
         </div>
           <Quicklink about={aboutLink} category={categoryLink} social={socialMedia} mobile={mobile}/>
-      </div> */}
+      </div>
     </div>
     </>
   )

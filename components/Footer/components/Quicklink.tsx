@@ -21,7 +21,7 @@ interface Social{
 const Quicklink : React.FC<QuickProps> = ({about, category, social, mobile}) => {
   return (
     <div>
-       <div className='grid grid-cols-3 gap-10 -ml-40'>
+       <div className={`${mobile ? "grid-cols-2 mt-10" : "grid-cols-3 -ml-40"} grid gap-10`}>
         {/* About Link */}
         <div className='space-y-3'>
           <h4 className='text-[1rem] font-semibold'>About</h4>

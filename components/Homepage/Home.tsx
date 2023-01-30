@@ -54,9 +54,9 @@ const Home = () => {
   
   return (
     <div>
-      {/* <HeroSection hero={hero} mobile={Mobile}/>
+      <HeroSection hero={hero} mobile={Mobile}/>
       <ProductSection mobile={Mobile} category={Category}/>
-      <SubscribeSection/> */}
+      <SubscribeSection mobile={Mobile}/>
     </div>
   );
 };

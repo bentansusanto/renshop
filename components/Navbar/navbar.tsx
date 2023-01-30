@@ -100,11 +100,11 @@ const Navbar = () => {
                 0
               </span>
             </div>
-            <Link href={"/"} className="text-[.9rem]">
+            <Link href={"/login"} className="text-[.9rem]">
               Login
             </Link>
             <button className="bg-black py-2 px-5 rounded-sm text-white text-[.9rem]">
-              <Link href={"/"}>Sign Up</Link>
+              <Link href={"/register"}>Sign Up</Link>
             </button>
           </div>
         </div>

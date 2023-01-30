@@ -43,8 +43,8 @@ const NavMobile = () => {
       <div
         className={`${
           visible
-            ? "bg-[#f5f5f5] w-full h-screen px-3 py-5 z-20 absolute -mt-16 transition-opacity duration-500 ease-out"
-            : "opacity-0 bottom-0"
+            ? "bg-[#f5f5f5] w-full h-screen px-3 py-5 z-40 fixed top-0 transition-opacity duration-500 ease-out"
+            : "hidden bottom-0"
         }`}
       >
         {/* Close Navbar mobile */}
@@ -56,10 +56,10 @@ const NavMobile = () => {
         {/* Login and Register */}
         <div className="my-5 flex justify-center space-x-6">
           <button className="border-black border px-5 py-2 rounded-sm text-[.9rem]">
-            <Link href={"/"}>Login</Link>
+            <Link href={"/login"}>Login</Link>
           </button>
           <button className="bg-black text-white px-5 py-2 rounded-sm text-[.9rem]">
-            <Link href={"/"}>Register</Link>
+            <Link href={"/register"}>Register</Link>
           </button>
         </div>
         <div className="bg-gray w-full h-[.5px]" />
@@ -92,9 +92,9 @@ const NavMobile = () => {
       {/* Search */}
       <div className={`${
           visibleSearch
-            ? "bg-[#f5f5f5] w-full h-screen px-3 py-5 z-30 absolute -mt-[26rem] transition-opacity duration-500 ease-out"
-            : "opacity-0 bottom-0"
-        }`}>
+            ? "bg-[#f5f5f5] w-full h-screen px-3 py-5 z-40 fixed top-0"
+            : "hidden bottom-0"
+        } transition-opacity duration-500 ease-out`}>
         <div>
         <GrFormClose className="text-2xl" onClick={() => isVisibleSearch(false)} />
           <div className="bg-gray w-full h-[.5px] my-5" />

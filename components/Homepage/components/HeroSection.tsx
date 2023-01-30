@@ -17,9 +17,9 @@ const HeroSection : React.FC<HeroProps> = ({hero, mobile}) => {
     <div>
         <div className={styles.background}>
             {/* Content */}
-            <div className='pt-[15rem] px-24 space-y-2'>
-                <h1 className={`${mobile ? "" : "text-[4rem] w-[35%]"} text-white font-medium font-oswald`}>{hero.title}</h1>
-                <p className={`${mobile ? "" : "w-[40%] text-[1rem]"} pb-4`}>{hero.content}</p>
+            <div className={`${mobile ? "px-6 pt-32" : "pt-[15rem] px-24"} space-y-2`}>
+                <h1 className={`${mobile ? "text-[3rem] w-[80%]" : "text-[4rem] w-[35%]"} text-white font-medium font-oswald`}>{hero.title}</h1>
+                <p className={`${mobile ? "w-[50%]" : "w-[40%] text-[1rem]"} pb-4`}>{hero.content}</p>
                 <button className='bg-black text-white py-2 px-5 rounded-sm'>
                     <Link href={'/'}>
                         View Collections
