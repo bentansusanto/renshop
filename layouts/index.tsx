@@ -10,11 +10,11 @@ const index = (props :LayoutProps) => {
     const {children} = props
     return (
     <div>
-        <Navbar/>
         <Providers>
+        <Navbar/>
         <main>{children}</main>
-        </Providers>
         <Footer/>
+        </Providers>
     </div>
   )
 }

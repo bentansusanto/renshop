@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-const baseURL = "https://fakestoreapi.com/products";
+const baseURL = 'https://fakestoreapi.com';
 
 export const fetchProducts =createAsyncThunk('products/getAllProducts', async() => {
    try {
-        const response = await axios.get(baseURL)
-        console.log(response.data)
+        const response = await axios.get(`${baseURL}/products`)
+        // console.log(response.data)
         return response.data
    } catch (error) {
     console.log(error)
@@ -14,7 +14,8 @@ export const fetchProducts =createAsyncThunk('products/getAllProducts', async() 
 })
 
 const initialState = {
-    entities : []
+    products : [],
+    filterCategory : []
 } as any
 
 
@@ -24,7 +25,7 @@ const productSlice = createSlice({
     reducers : {},
     extraReducers : (builder) => {
         builder.addCase(fetchProducts.fulfilled, (state, action) => {
-            state.entities = action.payload
+            state.products = action.payload
         })
     }
 })

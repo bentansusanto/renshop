@@ -1,26 +1,42 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { BiSearch } from "react-icons/bi";
 import { FiShoppingCart } from "react-icons/fi";
 import Logo from "../../public/assets/Renshop-black.svg";
 import NavMobile from "./NavMobile";
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from '../../store/store';
+import { fetchCategories } from '../../slice/categorySlice';
 
-type navItem = {
-  page: string;
-  link: string;
-};
+// type navItem = {
+//   page: string;
+//   link: string;
+// };
 
-const links: navItem[] = [
-  { page: "Women", link: "/women" },
-  { page: "Men", link: "/men" },
-  { page: "Jewerly", link: "/jewerly" },
-  { page: "Electronic", link: "/electronic" },
-];
+// const links: navItem[] = [
+//   { page: "Women", link: "/women" },
+//   { page: "Men", link: "/men" },
+//   { page: "Jewerly", link: "/jewerly" },
+//   { page: "Electronic", link: "/electronic" },
+// ];
 
 const Navbar = () => {
   const [Mobile, setMobile] = useState(false);
   const [open, setOpen] = useState(false);
+  const {categories} = useSelector((state : RootState) => state.category)
+  const dispatch = useDispatch<AppDispatch>()
+  const categoryRef = useRef(false)
+  const router = useRouter()
+
+
+  useEffect(() => {
+    if(categoryRef.current === false){
+        dispatch(fetchCategories());
+    }
+    dispatch(fetchCategories)
+}, [dispatch])
 
   // Responsive mobile
   useEffect(() => {
@@ -71,9 +87,9 @@ const Navbar = () => {
                   className={`${open ? "space-y-3 items-center mt-3 bg-[#fafafa] shadow-md rounded-md px-4 py-2 absolute top-8 transition-opacity duration-500 ease-in-out" : "opacity-0"}`}
                   onMouseLeave={() => setOpen(false)}
                 >
-                  {links.map((val, idx) => (
-                    <li key={idx}>
-                      <Link href={val.link}>{val.page}</Link>
+                  {categories.map((val, idx) => (
+                    <li key={idx} className="cursor-pointer">
+                      <p onClick={() => router.push('/'+val)}>{val}</p>
                     </li>
                   ))}
                 </ul>

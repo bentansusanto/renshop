@@ -44,7 +44,7 @@ const NavMobile = () => {
         className={`${
           visible
             ? "bg-[#f5f5f5] w-full h-screen px-3 py-5 z-40 fixed top-0 transition-opacity duration-500 ease-out"
-            : "hidden bottom-0"
+            : "opacity-0 fixed bottom-0"
         }`}
       >
         {/* Close Navbar mobile */}
@@ -92,9 +92,9 @@ const NavMobile = () => {
       {/* Search */}
       <div className={`${
           visibleSearch
-            ? "bg-[#f5f5f5] w-full h-screen px-3 py-5 z-40 fixed top-0"
-            : "hidden bottom-0"
-        } transition-opacity duration-500 ease-out`}>
+            ? "bg-[#f5f5f5] w-full h-screen px-3 py-5 z-40 fixed top-0 transition-opacity duration-500 ease-out"
+            : "opacity-0 fixed bottom-0"
+        }`}>
         <div>
         <GrFormClose className="text-2xl" onClick={() => isVisibleSearch(false)} />
           <div className="bg-gray w-full h-[.5px] my-5" />

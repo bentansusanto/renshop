@@ -64,7 +64,7 @@ const LoginPage = () => {
             </form>
             <p className="text-gray text-center">
               I don`t have account,
-              <Link href={"/login"} className="text-black">
+              <Link href={"/register"} className="text-black">
                 Register Now
               </Link>
             </p>

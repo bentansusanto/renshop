@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -8,7 +9,8 @@ const nextConfig = {
         hostname : "fakestoreapi.com"
       }
     ]
-  },
+  }
 }
 
 module.exports = nextConfig
+

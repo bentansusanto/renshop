@@ -3,8 +3,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Background from "../../public/assets/bg-login.jpg";
 
+
+
+
 const RegisterPage = () => {
   const [Mobile, setMobile] = useState(false);
+
+
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -21,6 +26,7 @@ const RegisterPage = () => {
       };
     }
   }, []);
+  
   return (
     <div>
       {Mobile ? (
@@ -99,13 +105,13 @@ const RegisterPage = () => {
                     Register Now
                   </button>
                 </div>
-              </form>
                 <p className="text-gray text-center">
                   I have account,
                   <Link href={"/login"} className="text-black">
                     Login Now
                   </Link>
                 </p>
+              </form>
             </div>
           </div>
         </div>

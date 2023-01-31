@@ -1,4 +1,4 @@
-import React,{useEffect, useRef} from 'react'
+import React,{useEffect, useReducer, useRef} from 'react'
 import Image from 'next/image';
 import Star from '../../../public/assets/Star.svg'
 import Link from 'next/link';
@@ -20,9 +20,10 @@ interface Category {
 
 
 const ProductSection : React.FC<productProps> = ({mobile, category}) => {
-    const {entities} = useSelector((state : RootState) => state.product)
+    const {products} = useSelector((state : RootState) => state.product)
     const dispatch = useDispatch<AppDispatch>()
     const productRef = useRef(false)
+    
 
     useEffect(() => {
         if(productRef.current === false){
@@ -35,6 +36,7 @@ const ProductSection : React.FC<productProps> = ({mobile, category}) => {
         }
       }, [dispatch])
 
+   
   return (
     <div>
         {/* Category */}
@@ -55,7 +57,7 @@ const ProductSection : React.FC<productProps> = ({mobile, category}) => {
             <h2 className='text-center font-oswald text-2xl font-medium'>Our Produts</h2>
         <div className={`${mobile ? "grid-cols-2 gap-10 mx-6" : "grid-cols-4 gap-5 mx-20"} grid justify-items-center`}>
             {
-                entities?.map((val:any) => (
+                products?.map((val:any) => (
                     <div key={val.id} className="w-[12rem] space-y-3">                       
                             <Image src={val.image} alt="" width={200} height={180} className='py-2 px-2'/>
                             {/* content */}
