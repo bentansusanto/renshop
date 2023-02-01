@@ -18,22 +18,15 @@ export const fetchCategories =createAsyncThunk('categories/getAllCategories', as
 
 const initialState = {
     categories : [],
-    filterCategories : []
 }
 
 const categorySlice = createSlice({
     name : 'categories',
     initialState,
-    reducers : {
-        filterCategories : (state, action) => {
-            state.filterCategories = state.categories.filter(
-                (category) => category === action.payload)
-        }
-    },
+    reducers : {},
     extraReducers : (builder) => {
         builder.addCase(fetchCategories.fulfilled, (state, action) => {
             state.categories = action.payload;
-            state.filterCategories = action.payload;
         })
     }
 })

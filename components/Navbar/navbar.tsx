@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from '../../store/store';
 import { fetchCategories } from '../../slice/categorySlice';
+import { fetchProductsByCategory } from '../../slice/productSlice';
 
 // type navItem = {
 //   page: string;
@@ -55,6 +56,11 @@ const Navbar = () => {
     }
   }, []);
 
+  const handleCategoryRoute = (categoryId : string) => {
+    dispatch(fetchProductsByCategory(categoryId))
+    router.push(`/category/${categoryId}`)
+  }
+
   return (
     <div>
       {Mobile ? (
@@ -87,9 +93,11 @@ const Navbar = () => {
                   className={`${open ? "space-y-3 items-center mt-3 bg-[#fafafa] shadow-md rounded-md px-4 py-2 absolute top-8 transition-opacity duration-500 ease-in-out" : "opacity-0"}`}
                   onMouseLeave={() => setOpen(false)}
                 >
-                  {categories.map((val, idx) => (
-                    <li key={idx} className="cursor-pointer">
-                      <p onClick={() => router.push('/'+val)}>{val}</p>
+                  {categories.map((val) => (
+                    <li key={val} className="cursor-pointer">
+                      <button onClick={() => handleCategoryRoute(val)}>
+                        {val}
+                      </button>
                     </li>
                   ))}
                 </ul>
