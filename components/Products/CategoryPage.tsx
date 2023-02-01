@@ -2,11 +2,13 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../store/store';
 import { useEffect } from 'react';
-import { fetchProductsByCategory } from '../../slice/productSlice';
+import { fetchProductsByCategory, fetchProductById } from '../../slice/productSlice';
 import Image from 'next/image';
 import Star from '../../public/assets/Star.svg'
+import { useRouter } from 'next/router';
 
 const CategoryPage = ({categoryId} : {categoryId : string}) => {
+  const router = useRouter()
   const dispatch = useDispatch<AppDispatch>()
   const {byCategory} = useSelector((state : RootState) => state.product)
   const products = byCategory[categoryId] || [];
@@ -15,6 +17,12 @@ const CategoryPage = ({categoryId} : {categoryId : string}) => {
       dispatch(fetchProductsByCategory(categoryId))
   }, [dispatch, categoryId])
 
+  const handleProductDetail = (productId : any) => {
+    dispatch(fetchProductById(productId))
+    router.push('/product/${productId}')
+    
+  }
+
 
   return (
     <div className='my-40'>
@@ -22,7 +30,7 @@ const CategoryPage = ({categoryId} : {categoryId : string}) => {
       <ul className='grid grid-cols-3 gap-5 mx-20 mt-20 justify-items-center'>
         {
           products.map((product : any) => (
-            <li key={product.id} className="space-y-2">
+            <li key={product.id} className="space-y-2" onClick={() => handleProductDetail(product.id)}>
                 <Image src={product.image} alt="" width={280} height={280} className="mx-auto"/>
                 {/* rating */}
                 <div className='flex items-center justify-center space-x-2'>

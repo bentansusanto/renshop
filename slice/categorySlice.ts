@@ -8,7 +8,7 @@ const baseUrl = 'https://fakestoreapi.com';
 export const fetchCategories =createAsyncThunk('categories/getAllCategories', async() => {
     try {
          const response = await axios.get(`${baseUrl}/products/categories`)
-         console.log(response.data)
+        //  console.log(response.data)
          return response.data
     } catch (error) {
      console.log(error)

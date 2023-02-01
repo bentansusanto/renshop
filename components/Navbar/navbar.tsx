@@ -11,17 +11,6 @@ import { AppDispatch, RootState } from '../../store/store';
 import { fetchCategories } from '../../slice/categorySlice';
 import { fetchProductsByCategory } from '../../slice/productSlice';
 
-// type navItem = {
-//   page: string;
-//   link: string;
-// };
-
-// const links: navItem[] = [
-//   { page: "Women", link: "/women" },
-//   { page: "Men", link: "/men" },
-//   { page: "Jewerly", link: "/jewerly" },
-//   { page: "Electronic", link: "/electronic" },
-// ];
 
 const Navbar = () => {
   const [Mobile, setMobile] = useState(false);
