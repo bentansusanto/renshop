@@ -39,6 +39,11 @@ const Navbar = () => {
     dispatch(fetchCategories)
 }, [dispatch])
 
+  const handleCategoryRoute = (categoryId : string) => {
+    dispatch(fetchProductsByCategory(categoryId))
+    router.push(`/category/${categoryId}`)
+  }
+
   // Responsive mobile
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -56,10 +61,6 @@ const Navbar = () => {
     }
   }, []);
 
-  const handleCategoryRoute = (categoryId : string) => {
-    dispatch(fetchProductsByCategory(categoryId))
-    router.push(`/category/${categoryId}`)
-  }
 
   return (
     <div>
@@ -90,12 +91,12 @@ const Navbar = () => {
               </li>
               {open && (
                 <ul
-                  className={`${open ? "space-y-3 items-center mt-3 bg-[#fafafa] shadow-md rounded-md px-4 py-2 absolute top-8 transition-opacity duration-500 ease-in-out" : "opacity-0"}`}
+                  className={`${open ? "space-y-3 w-[10rem] mt-3 bg-[#fafafa] shadow-md rounded-md px-4 py-2 absolute top-8 transition-opacity duration-500 ease-in-out" : "opacity-0"}`}
                   onMouseLeave={() => setOpen(false)}
                 >
                   {categories.map((val) => (
-                    <li key={val} className="cursor-pointer">
-                      <button onClick={() => handleCategoryRoute(val)}>
+                    <li key={val} className="cursor-pointe">
+                      <button onClick={() => handleCategoryRoute(val)} className="capitalize">
                         {val}
                       </button>
                     </li>
