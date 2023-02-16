@@ -18,7 +18,7 @@ const baseURL = 'https://fakestoreapi.com';
 export const fetchProducts =createAsyncThunk('products/getAllProducts', async() => {
    try {
         const response = await axios.get(`${baseURL}/products`)
-        console.log(response.data)
+        // console.log(response.data)
         return response.data
    } catch (error) {
     console.log(error)
@@ -29,7 +29,7 @@ export const fetchProducts =createAsyncThunk('products/getAllProducts', async() 
 export const fetchProductsByCategory = createAsyncThunk('products/fetchByCategory', async(categoryId : string) => {
     try {
         const response = await axios.get(`${baseURL}/products/category/${categoryId}`)
-        console.log(response.data)
+        // console.log(response.data)
         return response.data
     } catch (error) {
         console.log(error)
@@ -40,7 +40,7 @@ export const fetchProductsByCategory = createAsyncThunk('products/fetchByCategor
 export const fetchProductById = createAsyncThunk('products/fetchById', async(productId : Product) => {
     try {
         const response = await axios.get(`${baseURL}/products/${productId}`)
-        console.log(response.data)
+        // console.log(response.data)
         return response.data
     } catch (error) {
         console.log(error)

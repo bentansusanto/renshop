@@ -8,8 +8,22 @@ import { FiShoppingCart } from "react-icons/fi";
 import { GrFormClose } from "react-icons/gr";
 import { SiAboutdotme } from "react-icons/si";
 import Logo from "../../public/assets/Renshop-black.svg";
+import Avatar from "../../public/assets/avatar.svg";
 
-const NavMobile = () => {
+
+interface NavAuthProps{
+  isAuth : boolean
+  data : Profile,
+  Logout : any
+}
+
+interface Profile {
+  _id : string,
+  name : string,
+  email : string,
+}
+
+const NavMobile : React.FC<NavAuthProps> = ({isAuth, data, Logout}) => {
   const [visible, isVisible] = useState(false);
   const [visibleSearch, isVisibleSearch] = useState(false)
 
@@ -43,9 +57,9 @@ const NavMobile = () => {
       <div
         className={`${
           visible
-            ? "bg-[#f5f5f5] w-full h-screen px-3 py-5 z-40 fixed top-0 transition-opacity duration-500 ease-out"
+            ? "bg-[#f5f5f5] w-full h-screen px-3 py-5 z-40 fixed top-0 ease-out"
             : "opacity-0 fixed bottom-0"
-        }`}
+        } transition-opacity duration-500 `}
       >
         {/* Close Navbar mobile */}
         <div className="mb-5 flex items-center space-x-3">
@@ -54,13 +68,26 @@ const NavMobile = () => {
         </div>
         <div className="bg-gray w-full h-[.5px]" />
         {/* Login and Register */}
-        <div className="my-5 flex justify-center space-x-6">
-          <button className="border-black border px-5 py-2 rounded-sm text-[.9rem]">
-            <Link href={"/login"}>Login</Link>
-          </button>
-          <button className="bg-black text-white px-5 py-2 rounded-sm text-[.9rem]">
-            <Link href={"/register"}>Register</Link>
-          </button>
+        <div className="my-5 flex space-x-6">
+          {
+            isAuth ? 
+            (<div className="flex space-x-4">
+              <Image src={Avatar} alt="" className="w-16"/>
+              <div>
+                <p className="text-lg font-semibold capitalize">{data.name}</p>
+                <p className="text-gray">{data.email}</p>
+              </div>
+            </div>) : 
+            (<div className="justify-center">
+              <button className="border-black border px-5 py-2 rounded-sm text-[.9rem]">
+                <Link href={"/login"}>Login</Link>
+              </button>
+              <button className="bg-black text-white px-5 py-2 rounded-sm text-[.9rem]">
+                <Link href={"/register"}>Register</Link>
+              </button>
+            </div>)
+          }
+          
         </div>
         <div className="bg-gray w-full h-[.5px]" />
         {/* Quicklink */}

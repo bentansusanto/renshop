@@ -10,15 +10,66 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from '../../store/store';
 import { fetchCategories } from '../../slice/categorySlice';
 import { fetchProductsByCategory } from '../../slice/productSlice';
+import NavIsAuth from "./NavIsAuth";
+// import axios from "axios"/
 
+
+interface Profile{
+  _id : string,
+  name : string,
+  email : string,
+}
 
 const Navbar = () => {
   const [Mobile, setMobile] = useState(false);
+  const [data, setData] = useState<Profile>()
   const [open, setOpen] = useState(false);
   const {categories} = useSelector((state : RootState) => state.category)
   const dispatch = useDispatch<AppDispatch>()
   const categoryRef = useRef(false)
   const router = useRouter()
+  const baseUrl = 'http://localhost:8000'
+  const [isAuth, setIsAuth] = useState(false)
+  
+
+  // Get User
+  useEffect(() => {
+    const getUser = async() => {
+      try {
+        const response = await fetch(`${baseUrl}/api/user`,{
+          credentials : "include"
+        })
+        if(!response.ok){
+            throw new Error('Unauthorization')
+        }
+        // console.log(response)
+        const datas = await response.json()
+        setIsAuth(true)
+        setData(datas)
+      } catch (error) {
+        console.log(error)
+        setIsAuth(false)
+      }
+    }
+    getUser()
+  }, [])
+
+  // Logout
+  const Logout = async() => {
+    try {
+      const response = await fetch(`${baseUrl}/api/logout`, {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        credentials : "include"
+      })
+      if(!response.ok){
+        throw new Error('Network error')
+      }
+      router.push('/login')
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 
   useEffect(() => {
@@ -56,7 +107,7 @@ const Navbar = () => {
       {Mobile ? (
         // Mobile
         <div>
-          <NavMobile/>
+          <NavMobile isAuth={isAuth} data={data as Profile} Logout={Logout}/>
         </div>
       ) : (
         // Desktop
@@ -107,19 +158,14 @@ const Navbar = () => {
           </div>
 
           {/* Cart, Login */}
-          <div className="flex items-center space-x-8 ml-auto">
+          <div className="flex items-center space-x-10 ml-auto">
             <div className="relative">
               <FiShoppingCart className="text-xl" />
               <span className="bg-red rounded-full px-1.5 text-[.8rem] absolute top-0 left-3.5">
                 0
               </span>
             </div>
-            <Link href={"/login"} className="text-[.9rem]">
-              Login
-            </Link>
-            <button className="bg-black py-2 px-5 rounded-sm text-white text-[.9rem]">
-              <Link href={"/register"}>Sign Up</Link>
-            </button>
+            <NavIsAuth isAuth={isAuth} data={data as Profile} Logout={Logout}/>
           </div>
         </div>
       )}

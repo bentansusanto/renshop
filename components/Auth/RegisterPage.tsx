@@ -1,15 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import Background from "../../public/assets/bg-login.jpg";
-
-
-
+import FormRegister from "./Form/FormRegister";
 
 const RegisterPage = () => {
   const [Mobile, setMobile] = useState(false);
-
-
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -25,8 +20,8 @@ const RegisterPage = () => {
         mediaQuery.removeListener(handleMediaQuery);
       };
     }
-  }, []);
-  
+  }, []); 
+
   return (
     <div>
       {Mobile ? (
@@ -39,27 +34,7 @@ const RegisterPage = () => {
                 Create new account
               </p>
             </div>
-
-            <form action="" className="w-[20rem] mt-20">
-              <div className="mb-3">
-                <input type="text" placeholder="Enter your name" className="bg-[#f5f5f5] w-full py-3 px-2 text-[.9rem]" />
-              </div>
-              <div className="mb-3">
-                <input type="email" placeholder="Enter your email" className="bg-[#f5f5f5] w-full py-3 px-2 text-[.9rem]" />
-              </div>
-              <div className="mb-3">
-                <input type="password" placeholder="Enter your password" className="bg-[#f5f5f5] w-full py-3 px-2 text-[.9rem]" />
-              </div>
-              <div className="mb-3">
-                <button className="bg-black mx-auto text-white font-semibold w-full py-3">Register Now</button>
-              </div>
-            </form>
-              <p className="text-gray text-center">
-                  I have account,
-                  <Link href={"/login"} className="text-black">
-                    Login Now
-                  </Link>
-                </p>
+              <FormRegister/>
           </div>
         </div>
       ) : (
@@ -77,41 +52,7 @@ const RegisterPage = () => {
                   Welcome! please input field email and password for get member
                 </p>
               </div>
-              <form action="" className="mt-20 w-[20rem]">
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    placeholder="Enter your name"
-                    className="bg-[#f5f5f5] w-full py-3 px-2 rounded-sm outline-none"
-                    autoFocus
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="bg-[#f5f5f5] w-full py-3 px-2 rounded-sm outline-none"
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="password"
-                    placeholder="Enter your password"
-                    className="bg-[#f5f5f5] w-full py-3 px-2 rounded-sm outline-none"
-                  />
-                </div>
-                <div className="mb-3">
-                  <button className="bg-black w-full py-3 mx-auto text-white font-semibold">
-                    Register Now
-                  </button>
-                </div>
-                <p className="text-gray text-center">
-                  I have account,
-                  <Link href={"/login"} className="text-black">
-                    Login Now
-                  </Link>
-                </p>
-              </form>
+                <FormRegister/>
             </div>
           </div>
         </div>
