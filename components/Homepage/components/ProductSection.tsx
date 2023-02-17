@@ -1,30 +1,24 @@
-import React,{useEffect, useReducer, useRef} from 'react'
+import React,{useEffect, useRef} from 'react'
 import Image from 'next/image';
 import Star from '../../../public/assets/Star.svg'
-import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../../store/store';
-import { fetchProducts } from '../../../slice/productSlice';
-
-
+import { fetchProducts} from '../../../slice/productSlice';
+import { fetchProductById } from '../../../slice/productSlice';
+import { useRouter } from 'next/router';
 
 interface productProps {
     mobile : boolean;
-    category : Category[];
-}
-interface Category {
-    image : string;
-    category : string;
-    link : string;
 }
 
 
-const ProductSection : React.FC<productProps> = ({mobile, category}) => {
+const ProductSection : React.FC<productProps> = ({mobile}) => {
     const {products} = useSelector((state : RootState) => state.product)
     const dispatch = useDispatch<AppDispatch>()
     const productRef = useRef(false)
+    const router = useRouter()
     
-
+    // Get All Product
     useEffect(() => {
         if(productRef.current === false){
           dispatch(fetchProducts());
@@ -36,29 +30,21 @@ const ProductSection : React.FC<productProps> = ({mobile, category}) => {
         }
       }, [dispatch])
 
+      const handleProductDetail = (id : number) => {
+        dispatch(fetchProductById(id))
+        router.push(`/product/${id}`)
+      }
+
    
   return (
     <div>
-        {/* Category */}
-        <div className={` ${mobile ? "grid-cols-2 gap-5 mx-5" : "grid-cols-4 gap-5 mx-24"} grid justify-items-center mt-10`}>
-           {
-            category.map((val,idx) => (
-                <Link href={val.link} key={idx} className="relative">
-                    <Image src={val.image} alt="" className='w-[20rem]'/>
-                    <div className='bg-black w-full py-2 -mt-[2.8rem] opacity-50'>
-                        <h4 className=' text-xl font-semibold text-white text-center'>{val.category}</h4>
-                    </div>
-                </Link>
-            ))
-           } 
-        </div>
         {/* Product List */}
         <div className='mt-32 space-y-24'>
             <h2 className='text-center font-oswald text-2xl font-medium'>Our Produts</h2>
         <div className={`${mobile ? "grid-cols-2 gap-10 mx-6" : "grid-cols-4 gap-5 mx-20"} grid justify-items-center`}>
             {
                 products?.map((val:any) => (
-                    <div key={val.id} className="w-[12rem] space-y-3">                       
+                    <div key={val.id} className="w-[12rem] space-y-3" onClick={() => handleProductDetail(val.id)}>                       
                             <Image src={val.image} alt="" width={200} height={180} className='py-2 px-2'/>
                             {/* content */}
                             <div>

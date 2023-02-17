@@ -17,10 +17,9 @@ const CategoryPage = ({categoryId} : {categoryId : string}) => {
       dispatch(fetchProductsByCategory(categoryId))
   }, [dispatch, categoryId])
 
-  const handleProductDetail = (productId : any) => {
-    dispatch(fetchProductById(productId))
-    router.push('/product/${productId}')
-    
+  const handleProductDetail = (id : number) => {
+    dispatch(fetchProductById(id))
+    router.push(`/product/${id}`)
   }
 
 

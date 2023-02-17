@@ -6,9 +6,6 @@ interface Product{
     title : string,
     price : string,
     description : string,
-    rating : {
-        rate : number
-    }
 }
 
 
@@ -30,29 +27,27 @@ export const fetchProductsByCategory = createAsyncThunk('products/fetchByCategor
     try {
         const response = await axios.get(`${baseURL}/products/category/${categoryId}`)
         // console.log(response.data)
-        return response.data
+        return response.data 
     } catch (error) {
         console.log(error)
     }
 })
 
 // fetch product by id
-export const fetchProductById = createAsyncThunk('products/fetchById', async(productId : Product) => {
+export const fetchProductById = createAsyncThunk('products/fetchById', async(id : number) => {
     try {
-        const response = await axios.get(`${baseURL}/products/${productId}`)
-        // console.log(response.data)
+        const response = await axios.get(`${baseURL}/products/${id}`)
+        console.log(response.data)
         return response.data
     } catch (error) {
-        console.log(error)
+        console.log(error,'error')
     }
 })
-
-
 
 const initialState = {
     products : [],
     byCategory : {} as [key : string],
-    producId : {} as Product
+    product : []
 } as any
 
 
@@ -68,9 +63,10 @@ const productSlice = createSlice({
             state.byCategory[action.meta.arg] = action.payload
         })
         builder.addCase(fetchProductById.fulfilled, (state, action) => {
-            state.producId = action.payload
+            state.product = action.payload
         })
     }
 })
 
-export default productSlice.reducer
+
+export default productSlice.reducer;

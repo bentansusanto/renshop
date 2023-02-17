@@ -1,20 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { AiOutlineAppstore } from "react-icons/ai";
-import { BiCategory, BiHomeSmile, BiSearch } from "react-icons/bi";
+import { BiCategory, BiHomeSmile, BiSearch,BiLogOut } from "react-icons/bi";
 import { BsChevronDown, BsTelephoneOutbound } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 import { GrFormClose } from "react-icons/gr";
 import { SiAboutdotme } from "react-icons/si";
 import Logo from "../../public/assets/Renshop-black.svg";
 import Avatar from "../../public/assets/avatar.svg";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../../store/store";
+import { fetchCategories } from "../../slice/categorySlice";
+import { fetchProductsByCategory } from "../../slice/productSlice";
+// import useRef from 'react';
+import { useRouter } from 'next/router';
 
 
 interface NavAuthProps{
   isAuth : boolean
   data : Profile,
-  Logout : any
+  Logout : any,
+  about : About[]
 }
 
 interface Profile {
@@ -23,9 +30,33 @@ interface Profile {
   email : string,
 }
 
-const NavMobile : React.FC<NavAuthProps> = ({isAuth, data, Logout}) => {
+interface About{
+  page : string,
+  link : string
+}
+
+const NavMobile : React.FC<NavAuthProps> = ({isAuth, about, data, Logout}) => {
   const [visible, isVisible] = useState(false);
   const [visibleSearch, isVisibleSearch] = useState(false)
+  const {categories} = useSelector((state : RootState) => state.category)
+  const dispatch = useDispatch<AppDispatch>()
+  const categoryRef = useRef()
+  const router = useRouter()
+  const [dropDown, setDropDown] = useState(false)
+  const [abouts, setAbouts] = useState(false)
+
+
+  useEffect(() => {
+    if(categoryRef.current === false){
+        dispatch(fetchCategories());
+    }
+    dispatch(fetchCategories)
+}, [dispatch])
+
+  const handleCategoryRoute = (categoryId : string) => {
+    dispatch(fetchProductsByCategory(categoryId))
+    router.push(`/category/${categoryId}`)
+  } 
 
   return (
     <div>
@@ -75,10 +106,10 @@ const NavMobile : React.FC<NavAuthProps> = ({isAuth, data, Logout}) => {
               <Image src={Avatar} alt="" className="w-16"/>
               <div>
                 <p className="text-lg font-semibold capitalize">{data.name}</p>
-                <p className="text-gray">{data.email}</p>
+                <p className="text-gray text-[.8rem]">{data.email}</p>
               </div>
             </div>) : 
-            (<div className="justify-center">
+            (<div className=" flex mx-auto space-x-5">
               <button className="border-black border px-5 py-2 rounded-sm text-[.9rem]">
                 <Link href={"/login"}>Login</Link>
               </button>
@@ -98,20 +129,52 @@ const NavMobile : React.FC<NavAuthProps> = ({isAuth, data, Logout}) => {
               <BiHomeSmile className="text-lg" />
               <Link href={"/"}>Home</Link>
             </li>
-            <li className="flex items-center space-x-2.5">
-              <BiCategory className="text-lg text-semibold" />
-              <Link href={"/"}>Categories</Link>
-              <BsChevronDown className="text-md mt-1 text-semibold" />
+            <li>
+              <div onClick={() => setDropDown(!dropDown)} className="flex items-center space-x-2.5">
+                <BiCategory className="text-lg text-semibold" />
+                <Link href={"/"}>Categories</Link>
+                <BsChevronDown className="text-md mt-1 text-semibold" />
+              </div>
+              <ul className={`${dropDown ? "static space-y-3 ml-8 mt-4" : "hidden"}`}>
+              {categories.map((val) => (
+                    <li key={val} className="cursor-pointe">
+                      <button onClick={() => handleCategoryRoute(val)} className="capitalize">
+                        {val}
+                      </button>
+                    </li>
+                  ))}
+              </ul>
             </li>
-            <li className="flex items-center space-x-2.5">
-              <SiAboutdotme className="text-lg text-semibold" />
-              <Link href={"/"}>About</Link>
-              <BsChevronDown className="text-md mt-1 text-semibold" />
+            <li>
+              <div onClick={() => setAbouts(!abouts)} className="flex items-center space-x-2.5">
+                <SiAboutdotme className="text-lg text-semibold" />
+                <Link href={"/"}>About</Link>
+                <BsChevronDown className="text-md mt-1 text-semibold" />
+              </div>
+              <ul className={`${abouts ? "static space-y-3 ml-7 mt-4" : "hidden"}`}>
+                {
+                  about.map((val, idx) => (
+                    <li key={idx}>
+                      <Link href={val.link}>{val.page}</Link>
+                    </li>
+                  ))
+                }
+              </ul>
             </li>
             <li className="flex items-center space-x-2.5">
               <BsTelephoneOutbound className="text-md mt-1 text-semibold" />
               <Link href={"/"}>Contact</Link>
             </li>
+            {
+              isAuth ? 
+              (
+                <li onClick={Logout} className="flex items-center space-x-2.5 text-red">
+                  <BiLogOut className="text-lg mt-1 text-semibold" />
+                  <p>Logout</p>
+                </li>
+              ) : ""
+            }
+            
           </ul>
         </div>
       </div>

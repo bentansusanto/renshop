@@ -20,6 +20,12 @@ interface Profile{
   email : string,
 }
 
+const About = [
+  {page : "Our Company", link : "/"},
+  {page : "Jobs", link : "/"},
+  {page : "Blog", link : "/"},
+]
+
 const Navbar = () => {
   const [Mobile, setMobile] = useState(false);
   const [data, setData] = useState<Profile>()
@@ -107,7 +113,7 @@ const Navbar = () => {
       {Mobile ? (
         // Mobile
         <div>
-          <NavMobile isAuth={isAuth} data={data as Profile} Logout={Logout}/>
+          <NavMobile isAuth={isAuth} data={data as Profile} Logout={Logout} about={About}/>
         </div>
       ) : (
         // Desktop
